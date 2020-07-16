@@ -1,0 +1,149 @@
+#CLASS 0
+$Settings = "Tools|Party|Settings"
+#VAR Party {} {} VAR
+#VAR Gear_PartyWagons {} {} VAR
+#VAR PartyLeader {} {} VAR
+#VAR PartyLeaderPossessive {} {} VAR
+#VAR PartyLeader_Wagon {} {} VAR
+
+$PartyLeaderPossessive=""
+#IF (%rightback(%word(@PartyLeader,1),1)="s") {$PartyLeaderPossessive=%concat(%word(@PartyLeader,1),"'")
+} {$PartyLeaderPossessive=%concat(%word(@PartyLeader,1),"'s")
+}
+
+#VAR Messages_NotInParty {"Your party has been disbanded.|You are not in a party.|You leave %w's party.|YOu leave %w' party."} {} VAR
+
+#TR Party_Form {^{You form a new party.|You are already in a party.|You invited %w to join your party.|cannot join your party.}} {
+FollowOff
+#IF (!@Party) {#VAR Party {} {} VAR}
+#ADDI Party @MyName
+#VAR PartyLeader {@MyName} {} VAR
+#VAR PartyLeaderPossessive {@MyNamePossessive} {} VAR
+} $Settings
+
+#TR PartyLeaderDetected {^  %1 ~[Party Leader~]} {
+#IF (!@Party) {#VAR party {} {} VAR}
+#VAR PartyLeader {%1} {} VAR
+INFO Party Leader set to:  @PartyLeader
+#IF (!@Party) {#VAR party {} {} VAR}
+#ADDI party %trim(%1)
+#ADDI party @MyName
+$PartyLeaderPossessive=""
+#IF (%rightback(%word(@PartyLeader,1),1)="s") {
+  $PartyLeaderPossessive=%concat(%word(@PartyLeader,1),"'")
+} {
+  $PartyLeaderPossessive=%concat(%word(@PartyLeader,1),"'s")
+}
+#VAR PartyLeaderPossessive {$PartyLeaderPossessive} {} VAR
+} $Settings
+
+#TR NewPartyLeader {({You|%w}) become{s|} the new leader of your party.} {
+#IF (!@Party) {#VAR party {} {} VAR}
+#IF (%1="You") {
+  FollowOff
+  #VAR PartyLeader {@MyName} {} VAR
+  #ADDI Party @MyName} {
+    #VAR PartyLeader {%1} {} VAR
+    #ADDI party %1
+  }
+INFO Party Leader set to: @PartyLeader
+$PartyLeaderPossessive=""
+#IF (%rightback(%word(@PartyLeader,1),1)="s") {
+  $PartyLeaderPossessive=%concat(%word(@PartyLeader,1),"'")
+} {
+  $PartyLeaderPossessive=%concat(%word(@PartyLeader,1),"'s")
+}
+#VAR PartyLeaderPossessive {$PartyLeaderPossessive} {} VAR
+} $Settings
+
+#TR NewPartyMember {^({You|%w}) join{|s} ({your|%w's|%w'}) party.} {
+#IF (!@Party) {#VAR Party {} {} VAR}
+$member=%1;$leader=%2
+#IF ($leader="your") {$leader=@MyName} {$leader=%left($leader,%pos("'",$leader)-1)}
+#IF ($member="You") {$member=@MyName} {$member=%proper(%trim(%1))}
+#VAR PartyLeader {$leader} {} VAR
+#ADDI Party $leader
+#ADDI Party $member
+INFO Party Leader set to: $leader
+INFO Party Member added: $member
+$PartyLeaderPossessive=""
+#IF (%rightback(%word(@PartyLeader,1),1)="s") {$PartyLeaderPossessive=%concat(%word(@PartyLeader,1),"'")
+} {$PartyLeaderPossessive=%concat(%word(@PartyLeader,1),"'s")
+}
+#VAR PartyLeaderPossessive {$PartyLeaderPossessive} {} VAR
+} $Settings
+
+#TR MemberLeftYourParty {(%w) {"leaves|left"} your party.} {
+#IF (!@Party) {#VAR Party {@MyName} {} VAR}
+#VAR PartyLeader {@MyName} {} VAR
+$member=%proper(%trim(%1))
+#DELI Party $member
+INFO Party Leader: @PartyLeader
+INFO Party Member removed: $member
+#FORALL @Gear_PartyWagons {
+  #IF (%pos($member,%i)) {
+    #DELN Gear_PartyWagons %ismember(%i,@Gear_PartyWagons)
+  }
+}
+} $Settings
+
+#TR MemberLeftParty {^(%w) {"leaves|left"} (%w){"'s|'"} party.} {
+#IF (!@Party) {#VAR party {} {} VAR}
+$member=%proper(%trim(%1))
+#VAR PartyLeaderPossessive {} {} VAR
+$leader=%proper(%2)
+#VAR PartyLeader {$leader} {} VAR
+#DELI Party $member
+INFO Party Leader: $leader
+INFO Party Member removed: $member
+#FORALL @Gear_PartyWagons {
+  #IF (%pos($member,%i)) {
+    #DELN Gear_PartyWagons %ismember(%i,@Gear_PartyWagons)
+  }
+}
+} $Settings
+
+#TR YouLeaveParty {You left %w'{"|s"} party.} {
+#VAR Party {} {} VAR
+#VAR Gear_PartyWagons {} {} VAR
+} $Settings
+
+#TR RemovePartyMember {^You removed %1 from your party.} {
+$member=%1
+#DELI Party $member
+#FORALL @Gear_PartyWagons {
+  #IF (%pos(%lower($member),%i)) {
+    #DELN Gear_PartyWagons %ismember(%i,@Gear_PartyWagons)
+  }
+}
+} $Settings
+
+#TR PartyMemberBleeding {^({@Party|@ProfileGods}) is bleeding} {
+$member=%lower(%1)
+do dismount,bandage $member,protect $member,shield $member
+} $Settings
+
+#TR PartySay {^Party say from %1:%s*} {
+#CAP INFO
+#IF (!@Party) {#VAR Party {} {} VAR}
+#ADDI Party @MyName
+#ADDI Party %trim(%1)
+} $Settings
+
+#TR MyPartySay {^You say to your party: *} {
+#CAP INFO
+#IF (!@Party) {#VAR party {} {} VAR}
+#ADDI Party @MyName
+} $Settings
+
+#TR NoParty {{"Your party has been disbanded.|You are not in a party.|You leave %w's party.|YOu leave %w' party."}} {
+#VAR Party {} {} VAR
+#VAR PartyLeader {} {} VAR
+#VAR Gear_PartyWagons {} {} VAR
+} $Settings
+
+#TR AddGodtoFriendsList {({@ProfileGods}) tried to give you something.} {
+friend (%lower(%1))
+} $Settings
+
+#CLASS 0
