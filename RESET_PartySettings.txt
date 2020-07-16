@@ -1,4 +1,4 @@
-#CLASS 0
+//RESET_PartySettings#CLASS 0#AL RESET_PartySettings {#CLASS 0
 $Settings = "Tools|Party|Settings"
 #VAR Party {} {} VAR
 #VAR Gear_PartyWagons {} {} VAR
@@ -146,4 +146,4 @@ do dismount,bandage $member,protect $member,shield $member
 friend (%lower(%1))
 } $Settings
 
-#CLASS 0
+#CLASS 0} _Party#CLASS 0

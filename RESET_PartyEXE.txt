@@ -1,4 +1,4 @@
-//RESET_PARTY
+//RESET_PartyEXE#CLASS 0#AL RESET_PartyEXE {//RESET_PARTY
 #CLASS 0
 $CLASS = "Tools|Party|EXE"
 #AL PL {
@@ -22,7 +22,7 @@ party invite %lower(%0)
 } $CLASS
 
 #AL PJ {
-party join
+party join 
 } $CLASS
 
 
@@ -203,7 +203,7 @@ party status
 } $CLASS
 
 #AL ppl {
-party promote
+party promote 
 } $CLASS
 
 #AL pu {
@@ -211,7 +211,7 @@ party unprotect
 } $CLASS
 
 #AL pem {
-party emote
+party emote 
 } $CLASS
 
 #AL pm {
@@ -259,4 +259,4 @@ do party form,party invite vraerius
 } $CLASS
 
 
-#CLASS 0
+#CLASS 0} _Party#CLASS 0
