@@ -1,0 +1,262 @@
+//RESET_PARTY
+#CLASS 0
+$CLASS = "Tools|Party|EXE"
+#AL PL {
+party leader %lower(%0)
+} $CLASS
+
+#AL PHP {
+party hp
+} $CLASS
+
+#AL PD {
+party disband
+} $CLASS
+
+#AL PF {
+party form
+} $CLASS
+
+#AL pi {
+party invite %lower(%0)
+} $CLASS
+
+#AL PJ {
+party join
+} $CLASS
+
+
+#AL piHaek {
+do party form,party invite haekon
+} $CLASS
+
+#AL piBau {
+do party form,party invite bauruk
+} $CLASS
+
+#AL piBra {
+do party form,party invite bramoukh
+} $CLASS
+
+#AL piCar {
+do party form,party invite carinthia
+} $CLASS
+
+#AL piCoc {
+do party form,party invite coconut
+} $CLASS
+
+#AL piJy {
+do party form,party invite jynx
+} $CLASS
+
+#AL piKum {
+do party form,party invite kumquat
+} $CLASS
+
+#AL piManko {
+do party form,party invite manko
+} $CLASS
+
+#AL piPhd {
+do party form,party invite phngdar
+} $CLASS
+
+#AL piPhi {
+do party form,party invite phinks
+} $CLASS
+
+#AL piryk {
+do party form,party invite rykker
+} $CLASS
+
+#AL piSca {
+do party form,party invite scarlett
+} $CLASS
+
+#AL piSea {
+do party form,party invite seairina
+} $CLASS
+
+#AL piSek {
+do party form,party invite seksitilip
+} $CLASS
+
+#AL piSpr {
+do party form,party invite spryx
+} $CLASS
+
+#AL piTit {
+do party form,party invite titetero
+} $CLASS
+
+#AL plbra {
+party leader bramoukh
+} $CLASS
+
+#AL plcar {
+party leader carinthia
+} $CLASS
+
+#AL plcoc {
+party leader coconut
+} $CLASS
+
+#AL pldon {
+party leader donald
+} $CLASS
+
+#AL plhaek {
+party leader haekon
+} $CLASS
+
+#AL plill {
+party leader illumi
+} $CLASS
+
+#AL plkum {
+party leader kumquat
+} $CLASS
+
+#AL plphi {
+party leader phinks
+} $CLASS
+
+#AL plryk {
+party leader rykker
+} $CLASS
+
+#AL plsca {
+party leader scarlett
+} $CLASS
+
+#AL plsea {
+party leader seairina
+} $CLASS
+
+#AL plsek {
+party leader seksitilip
+} $CLASS
+
+#AL pltit {
+party leader titetero
+} $CLASS
+
+#AL pp {
+party protect
+} $CLASS
+
+#AL pimhak {
+do party form,party invite mhaksatrei
+} $CLASS
+
+#AL plmhak {
+party leader mhaksatrei
+} $CLASS
+
+#AL pimam {
+do party form,party invite mammoth
+} $CLASS
+
+#AL piall {
+do party form,party invite alluka
+} $CLASS
+
+#AL pibrook {
+do party form,party invite brooklyn
+} $CLASS
+
+#AL plmam {
+party leader mammoth
+} $CLASS
+
+#AL pizi {
+do party form,party invite zzigg
+} $CLASS
+
+#AL piater {
+do party form,party invite ateralus
+} $CLASS
+
+#AL piio {
+do party form,party invite ionx
+} $CLASS
+
+#AL pichr {
+do party form,party invite chrollo
+} $CLASS
+
+#AL plchr {
+party leader chrollo
+} $CLASS
+
+#AL pstat {
+partystat
+} $CLASS
+
+#AL pst {
+party status
+} $CLASS
+
+#AL ps {
+#SW (%ismember(@MyName,@profiles_sam)) {party say ~$HIR~$ %0} (%ismember(@MyName,@profiles_t)) {party say ~$HIY~$ %0} {party say %0}
+} $CLASS
+
+#AL ppl {
+party promote
+} $CLASS
+
+#AL pu {
+party unprotect
+} $CLASS
+
+#AL pem {
+party emote
+} $CLASS
+
+#AL pm {
+party members
+} $CLASS
+
+#AL pitung {
+do party form,party invite tungku
+} $CLASS
+
+#AL ap {
+allow party
+} $CLASS
+
+#AL pikh {
+do party form,party invite khairun
+} $CLASS
+
+#AL plkh {
+party leader khairun
+} $CLASS
+
+#AL pishaka {
+do party form,party invite shakalaka
+} $CLASS
+
+#AL pimebu {
+do party form,party invite mebu
+} $CLASS
+
+#AL plmebu {
+party leader mebu
+} $CLASS
+
+#AL pimiz {
+do party form,party invite mizan
+} $CLASS
+
+#AL pioge {
+do party form,party invite ogeday
+} $CLASS
+
+#AL pivra {
+do party form,party invite vraerius
+} $CLASS
+
+
+#CLASS 0
